@@ -1,0 +1,46 @@
+""import { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+
+/**
+ * GameApp - A simple game where the user clicks on a moving target to score points.
+ */
+const GameApp = () => {
+  // State to track target position and user score
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+  const [score, setScore] = useState(0);
+
+  /**
+   * moveTarget - Randomly moves the target to a new position and updates the score.
+   */
+  const moveTarget = () => {
+    const newX = Math.random() * 90 + 5; // New X position (5% to 95%)
+    const newY = Math.random() * 90 + 5; // New Y position (5% to 95%)
+    setPosition({ x: newX, y: newY });
+    setScore(score + 1);
+  };
+
+  return (
+    <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
+      <h1 className='text-2xl mb-4'>Catch the Target!</h1>
+      <p className='mb-4'>Score: {score}</p>
+      <motion.div className='w-full h-full relative' onClick={moveTarget}>
+        <motion.div
+          className='w-10 h-10 bg-red-500 rounded-full absolute'
+          animate={{
+            left: `${position.x}%`,
+            top: `${position.y}%`,
+          }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        />
+      </motion.div>
+      <Button className='mt-4' onClick={() => setScore(0)}>
+        Reset Game
+      </Button>
+    </div>
+  );
+};
+
+export default GameApp;
+""
